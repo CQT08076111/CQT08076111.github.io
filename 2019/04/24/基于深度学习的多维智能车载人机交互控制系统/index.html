@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="注：这是本人参加挑战杯负责的项目部分，这次的手势识别方案与电设时的手势识别方案不同，相比之下这次的识别更加准确稳定受光线影响小进步明显，由于代码过长（1000多行）不方便展示，所以这里只展示核心部分代码 设计思路：作品设计分为三大部分，分别是手势语音识别平台、车载控制系统、HUD和触摸屏显示系统。手势语音识别平台负责采集并识别人对车辆发出的交互指令，然后对从机（即控制系统）进行数据传送。车载系统负">
+<meta name="keywords" content="智能,python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于深度学习的多维智能车载人机交互控制系统">
+<meta property="og:url" content="http://yoursite.com/2019/04/24/基于深度学习的多维智能车载人机交互控制系统/index.html">
+<meta property="og:site_name" content="CQT">
+<meta property="og:description" content="注：这是本人参加挑战杯负责的项目部分，这次的手势识别方案与电设时的手势识别方案不同，相比之下这次的识别更加准确稳定受光线影响小进步明显，由于代码过长（1000多行）不方便展示，所以这里只展示核心部分代码 设计思路：作品设计分为三大部分，分别是手势语音识别平台、车载控制系统、HUD和触摸屏显示系统。手势语音识别平台负责采集并识别人对车辆发出的交互指令，然后对从机（即控制系统）进行数据传送。车载系统负">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/车载手势/音乐.png">
+<meta property="og:image" content="http://yoursite.com/images/车载手势/音量.png">
+<meta property="og:image" content="http://yoursite.com/images/车载手势/通话.png">
+<meta property="og:image" content="http://yoursite.com/images/车载手势/地图.png">
+<meta property="og:image" content="http://yoursite.com/images/车载手势/语音.png">
+<meta property="og:updated_time" content="2019-04-24T09:23:29.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于深度学习的多维智能车载人机交互控制系统">
+<meta name="twitter:description" content="注：这是本人参加挑战杯负责的项目部分，这次的手势识别方案与电设时的手势识别方案不同，相比之下这次的识别更加准确稳定受光线影响小进步明显，由于代码过长（1000多行）不方便展示，所以这里只展示核心部分代码 设计思路：作品设计分为三大部分，分别是手势语音识别平台、车载控制系统、HUD和触摸屏显示系统。手势语音识别平台负责采集并识别人对车辆发出的交互指令，然后对从机（即控制系统）进行数据传送。车载系统负">
+<meta name="twitter:image" content="http://yoursite.com/images/车载手势/音乐.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/04/24/基于深度学习的多维智能车载人机交互控制系统/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>基于深度学习的多维智能车载人机交互控制系统 | CQT</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/CQT08076111" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CQT</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/24/基于深度学习的多维智能车载人机交互控制系统/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="我曹">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/toxian.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CQT">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于深度学习的多维智能车载人机交互控制系统
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-24 00:00:00 / 修改时间：17:23:29" itemprop="dateCreated datePublished" datetime="2019-04-24T00:00:00+08:00">2019-04-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/智能/" itemprop="url" rel="index"><span itemprop="name">智能</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>注：这是本人参加挑战杯负责的项目部分，这次的手势识别方案与电设时的手势识别方案不同，相比之下这次的识别更加准确稳定受光线影响小进步明显，由于代码过长（1000多行）不方便展示，所以这里只展示核心部分代码</p>
+<h2 id="设计思路："><a href="#设计思路：" class="headerlink" title="设计思路："></a>设计思路：</h2><p>作品设计分为三大部分，分别是手势语音识别平台、车载控制系统、HUD和触摸屏显示系统。手势语音识别平台负责采集并识别人对车辆发出的交互指令，然后对从机（即控制系统）进行数据传送。车载系统负责接收手势语音识别平台发送过来的指令信息，实现对汽车的中控屏、HUD、车灯、雨刮、接听电话、调节音量等功能的控制；同时还能收集车辆运行时的参数（如车速，油量等）在HUD系统上显示出来。HUD和触摸屏显示系统分为HUD显示器和15寸触摸屏，HUD显示器通过投影技术把车辆仪表盘，导航路线投影到前窗玻璃上；触摸屏主要用以显示车载的软件系统、音乐音量、来电显示等。</p>
+<h2 id="创新点："><a href="#创新点：" class="headerlink" title="创新点："></a>创新点：</h2><p>运用手势和语音这两种更自然、更直观的交互手段，以及目前日趋成熟的触摸屏进行多维的控制，给驾驶员带来与众不同的驾驶以及人车交互的体验，增加了行车时操作车载系统的便利性，避免驾驶员注意力分散，从而保证行车安全。</p>
+<h2 id="技术关键："><a href="#技术关键：" class="headerlink" title="技术关键："></a>技术关键：</h2><p>手势识别技术、语音识别交互技术、图像处理技术，嵌入式控制技术，HUD显示技术、处理软件的自主研发。</p>
+<h2 id="项目设计方案："><a href="#项目设计方案：" class="headerlink" title="项目设计方案："></a>项目设计方案：</h2><p>手势识别：使用Google开源深度学习框架tensorflow搭建CNN神经网络训练手势识别模型对手势进行时时动态识别，目前可以识别8种手势<br>语音识别：调用科大讯飞语音识别API对语音信息进行时时识别和回复<br>车载系统界面：使用Python的图形界面设计库PYQT5设计车载系统界面</p>
+<h2 id="核心代码实现"><a href="#核心代码实现" class="headerlink" title="核心代码实现"></a>核心代码实现</h2><h3 id="手势识别部分代码"><a href="#手势识别部分代码" class="headerlink" title="手势识别部分代码"></a>手势识别部分代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br></pre></td><td class="code"><pre><span class="line">def main(self):</span><br><span class="line">    global joint_detections</span><br><span class="line">    os.environ[<span class="string">'CUDA_VISIBLE_DEVICES'</span>] = str(FLAGS.gpu_id)</span><br><span class="line"></span><br><span class="line">    <span class="string">""</span><span class="string">" Initial tracker最初的追踪</span></span><br><span class="line"><span class="string">    "</span><span class="string">""</span></span><br><span class="line">    tracker = tracking_module.SelfTracker([FLAGS.webcam_height, FLAGS.webcam_width], FLAGS.input_size)</span><br><span class="line"></span><br><span class="line">    <span class="string">""</span><span class="string">" Build network graph构建网络图</span></span><br><span class="line"><span class="string">    "</span><span class="string">""</span></span><br><span class="line"></span><br><span class="line">    model = cpm_model.CPM_Model(input_size=FLAGS.input_size,</span><br><span class="line">                                heatmap_size=FLAGS.heatmap_size,</span><br><span class="line">                                stages=FLAGS.cpm_stages,</span><br><span class="line">                                joints=FLAGS.num_of_joints,</span><br><span class="line">                                img_type=FLAGS.color_channel,</span><br><span class="line">                                is_training=False)</span><br><span class="line">    saver = tf.train.Saver()</span><br><span class="line"></span><br><span class="line">    <span class="string">""</span><span class="string">" Get output node得到输出节点</span></span><br><span class="line"><span class="string">    "</span><span class="string">""</span></span><br><span class="line">    output_node = tf.get_default_graph().get_tensor_by_name(name=FLAGS.output_node_names)</span><br><span class="line"></span><br><span class="line">    device_count = &#123;<span class="string">'GPU'</span>: 1&#125; <span class="keyword">if</span> FLAGS.use_gpu <span class="keyword">else</span> &#123;<span class="string">'GPU'</span>: 0&#125;</span><br><span class="line">    sess_config = tf.ConfigProto(device_count=device_count)</span><br><span class="line">    sess_config.gpu_options.per_process_gpu_memory_fraction = 0.2</span><br><span class="line">    sess_config.gpu_options.allow_growth = True</span><br><span class="line">    sess_config.allow_soft_placement = True</span><br><span class="line">    with tf.Session(config=sess_config) as sess:</span><br><span class="line"></span><br><span class="line">        model_path_suffix = os.path.join(FLAGS.network_def,</span><br><span class="line">                                         <span class="string">'input_&#123;&#125;_output_&#123;&#125;'</span>.format(FLAGS.input_size, FLAGS.heatmap_size),</span><br><span class="line">                                         <span class="string">'joints_&#123;&#125;'</span>.format(FLAGS.num_of_joints),</span><br><span class="line">                                         <span class="string">'stages_&#123;&#125;'</span>.format(FLAGS.cpm_stages),</span><br><span class="line">                                         <span class="string">'init_&#123;&#125;_rate_&#123;&#125;_step_&#123;&#125;'</span>.format(FLAGS.init_lr, FLAGS.lr_decay_rate,</span><br><span class="line">                                                                          FLAGS.lr_decay_step)</span><br><span class="line">                                         )</span><br><span class="line">        model_save_dir = os.path.join(<span class="string">'models'</span>,</span><br><span class="line">                                      <span class="string">'weights'</span>,</span><br><span class="line">                                      model_path_suffix)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">'Load model from [&#123;&#125;]'</span>.format(os.path.join(model_save_dir, FLAGS.model_path)))</span><br><span class="line">        <span class="keyword">if</span> FLAGS.model_path.endswith(<span class="string">'pkl'</span>):</span><br><span class="line">            model.load_weights_from_file(FLAGS.model_path, sess, False)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            saver.restore(sess, <span class="string">'cpm_hand_tf/cpm_hand'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Check weights检查重量</span></span><br><span class="line">        <span class="keyword">for</span> variable <span class="keyword">in</span> tf.global_variables():</span><br><span class="line">            with tf.variable_scope(<span class="string">''</span>, reuse=True):</span><br><span class="line">                var = tf.get_variable(variable.name.split(<span class="string">':0'</span>)[0])</span><br><span class="line">                <span class="built_in">print</span>(variable.name, np.mean(sess.run(var)))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Create webcam instance创建远程实例</span></span><br><span class="line">        <span class="keyword">if</span> FLAGS.DEMO_TYPE <span class="keyword">in</span> [<span class="string">'MULTI'</span>, <span class="string">'SINGLE'</span>, <span class="string">'Joint_HM'</span>]:</span><br><span class="line">            cam = cv2.VideoCapture(1)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Create kalman filters建立卡尔曼滤波器</span></span><br><span class="line">        <span class="keyword">if</span> FLAGS.use_kalman:</span><br><span class="line">            kalman_filter_array = [cv2.KalmanFilter(4, 2) <span class="keyword">for</span> _ <span class="keyword">in</span> range(FLAGS.num_of_joints)]</span><br><span class="line">            <span class="keyword">for</span> _, joint_kalman_filter <span class="keyword">in</span> enumerate(kalman_filter_array):</span><br><span class="line">                joint_kalman_filter.transitionMatrix = np.array(</span><br><span class="line">                    [[1, 0, 1, 0], [0, 1, 0, 1], [0, 0, 1, 0], [0, 0, 0, 1]],</span><br><span class="line">                    np.float32)</span><br><span class="line">                joint_kalman_filter.measurementMatrix = np.array([[1, 0, 0, 0], [0, 1, 0, 0]], np.float32)</span><br><span class="line">                joint_kalman_filter.processNoiseCov = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]],</span><br><span class="line">                                                               np.float32) * FLAGS.kalman_noise</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            kalman_filter_array = None</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> FLAGS.DEMO_TYPE.endswith((<span class="string">'png'</span>, <span class="string">'jpg'</span>)):</span><br><span class="line">            test_img = cpm_utils.read_image(FLAGS.DEMO_TYPE, [], FLAGS.input_size, <span class="string">'IMAGE'</span>)</span><br><span class="line">            test_img_resize = cv2.resize(test_img, (FLAGS.input_size, FLAGS.input_size))</span><br><span class="line"></span><br><span class="line">            test_img_input = self.normalize_and_centralize_img(test_img_resize)</span><br><span class="line"></span><br><span class="line">            t1 = time.time()</span><br><span class="line">            predict_heatmap, stage_heatmap_np = sess.run([model.current_heatmap,</span><br><span class="line">                                                          output_node,</span><br><span class="line">                                                          ],</span><br><span class="line">                                                         feed_dict=&#123;model.input_images: test_img_input&#125;</span><br><span class="line">                                                         )</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">'fps: %.2f'</span> % (1 / (time.time() - t1)))</span><br><span class="line"></span><br><span class="line">            self.correct_and_draw_hand(test_img,</span><br><span class="line">                                  cv2.resize(stage_heatmap_np[0], (FLAGS.input_size, FLAGS.input_size)),</span><br><span class="line">                                  kalman_filter_array, tracker, tracker.input_crop_ratio, test_img)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Show visualized image显示可视化图像</span></span><br><span class="line">            <span class="comment"># demo_img = visualize_result(test_img, stage_heatmap_np, kalman_filter_array)</span></span><br><span class="line">            <span class="comment">#cv2.imshow('demo_img', test_img.astype(np.uint8))</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">#cv2.waitKey(0)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">elif</span> FLAGS.DEMO_TYPE <span class="keyword">in</span> [<span class="string">'SINGLE'</span>, <span class="string">'MULTI'</span>]:</span><br><span class="line">            <span class="keyword">while</span> True:</span><br><span class="line">                <span class="comment"># # Prepare input image准备输入图像</span></span><br><span class="line">                _, full_img = cam.read()</span><br><span class="line"></span><br><span class="line">                test_img = tracker.tracking_by_joints(full_img, joint_detections=joint_detections)</span><br><span class="line">                crop_full_scale = tracker.input_crop_ratio</span><br><span class="line">                test_img_copy = test_img.copy()</span><br><span class="line"></span><br><span class="line">                <span class="comment"># White balance白色平衡</span></span><br><span class="line">                test_img_wb = utils.img_white_balance(test_img, 5)</span><br><span class="line">                test_img_input = self.normalize_and_centralize_img(test_img_wb)</span><br><span class="line"></span><br><span class="line">                <span class="comment"># Inference推理</span></span><br><span class="line">                t1 = time.time()</span><br><span class="line">                stage_heatmap_np = sess.run([output_node],</span><br><span class="line">                                            feed_dict=&#123;model.input_images: test_img_input&#125;)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">'FPS: %.2f'</span> % (1 / (time.time() - t1)))</span><br><span class="line"></span><br><span class="line">                local_img = self.visualize_result(full_img, stage_heatmap_np, kalman_filter_array, tracker, crop_full_scale,</span><br><span class="line">                                             test_img_copy)</span><br><span class="line"></span><br><span class="line">                cv2.imshow(<span class="string">'global_img'</span>, full_img.astype(np.uint8))</span><br><span class="line">                <span class="comment">#cv2.imshow('local_img', local_img.astype(np.uint8))</span></span><br><span class="line">                <span class="comment">#cv2.imwrite('image/' + 'img.jpg', local_img.astype(np.uint8), [int(cv2.IMWRITE_JPEG_QUALITY), 90])</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> cv2.waitKey(1) == ord(<span class="string">'q'</span>):</span><br><span class="line">                    cam.release()</span><br><span class="line">                    <span class="built_in">break</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">elif</span> FLAGS.DEMO_TYPE == <span class="string">'Joint_HM'</span>:</span><br><span class="line">            <span class="keyword">while</span> True:</span><br><span class="line">                <span class="comment"># Prepare input image准备输入图像</span></span><br><span class="line">                test_img = cpm_utils.read_image([], cam, FLAGS.input_size, <span class="string">'WEBCAM'</span>)</span><br><span class="line">                test_img_resize = cv2.resize(test_img, (FLAGS.input_size, FLAGS.input_size))</span><br><span class="line"></span><br><span class="line">                test_img_input = self.normalize_and_centralize_img(test_img_resize)</span><br><span class="line"></span><br><span class="line">                <span class="comment"># Inference</span></span><br><span class="line">                t1 = time.time()</span><br><span class="line">                stage_heatmap_np = sess.run([output_node],</span><br><span class="line">                                            feed_dict=&#123;model.input_images: test_img_input&#125;)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">'FPS: %.2f'</span> % (1 / (time.time() - t1)))</span><br><span class="line"></span><br><span class="line">                demo_stage_heatmap = stage_heatmap_np[len(stage_heatmap_np) - 1][0, :, :,</span><br><span class="line">                                     0:FLAGS.num_of_joints].reshape(</span><br><span class="line">                    (FLAGS.heatmap_size, FLAGS.heatmap_size, FLAGS.num_of_joints))</span><br><span class="line">                demo_stage_heatmap = cv2.resize(demo_stage_heatmap, (FLAGS.input_size, FLAGS.input_size))</span><br><span class="line"></span><br><span class="line">                vertical_imgs = []</span><br><span class="line">                tmp_img = None</span><br><span class="line">                joint_coord_set = np.zeros((FLAGS.num_of_joints, 2))</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> joint_num <span class="keyword">in</span> range(FLAGS.num_of_joints):</span><br><span class="line">                    <span class="comment"># Concat until 4 img直到凌晨4点</span></span><br><span class="line">                    <span class="keyword">if</span> (joint_num % 4) == 0 and joint_num != 0:</span><br><span class="line">                        vertical_imgs.append(tmp_img)</span><br><span class="line">                        tmp_img = None</span><br><span class="line"></span><br><span class="line">                    demo_stage_heatmap[:, :, joint_num] *= (255 / np.max(demo_stage_heatmap[:, :, joint_num]))</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Plot color joints图颜色关节</span></span><br><span class="line">                    <span class="keyword">if</span> np.min(demo_stage_heatmap[:, :, joint_num]) &gt; -50:</span><br><span class="line">                        joint_coord = np.unravel_index(np.argmax(demo_stage_heatmap[:, :, joint_num]),</span><br><span class="line">                                                       (FLAGS.input_size, FLAGS.input_size))</span><br><span class="line">                        joint_coord_set[joint_num, :] = joint_coord</span><br><span class="line">                        color_code_num = (joint_num // 4)</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">if</span> joint_num <span class="keyword">in</span> [0, 4, 8, 12, 16]:</span><br><span class="line">                            joint_color = list(</span><br><span class="line">                                map(lambda x: x + 35 * (joint_num % 4), FLAGS.joint_color_code[color_code_num]))</span><br><span class="line">                            cv2.circle(test_img, center=(joint_coord[1], joint_coord[0]), radius=3, color=joint_color,</span><br><span class="line">                                       thickness=-1)</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            joint_color = list(</span><br><span class="line">                                map(lambda x: x + 35 * (joint_num % 4), FLAGS.joint_color_code[color_code_num]))</span><br><span class="line">                            cv2.circle(test_img, center=(joint_coord[1], joint_coord[0]), radius=3, color=joint_color,</span><br><span class="line">                                       thickness=-1)</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Put text把文本</span></span><br><span class="line">                    tmp = demo_stage_heatmap[:, :, joint_num].astype(np.uint8)</span><br><span class="line">                    tmp = cv2.putText(tmp, <span class="string">'Min:'</span> + str(np.min(demo_stage_heatmap[:, :, joint_num])),</span><br><span class="line">                                      org=(5, 20), fontFace=cv2.FONT_HERSHEY_COMPLEX, fontScale=0.3, color=150)</span><br><span class="line">                    tmp = cv2.putText(tmp, <span class="string">'Mean:'</span> + str(np.mean(demo_stage_heatmap[:, :, joint_num])),</span><br><span class="line">                                      org=(5, 30), fontFace=cv2.FONT_HERSHEY_COMPLEX, fontScale=0.3, color=150)</span><br><span class="line">                    tmp_img = np.concatenate((tmp_img, tmp), axis=0) \</span><br><span class="line">                        <span class="keyword">if</span> tmp_img is not None <span class="keyword">else</span> tmp</span><br><span class="line"></span><br><span class="line">                <span class="comment"># Plot FLAGS.limbs情节FLAGS.limbs</span></span><br><span class="line">                <span class="keyword">for</span> limb_num <span class="keyword">in</span> range(len(FLAGS.limbs)):</span><br><span class="line">                    <span class="keyword">if</span> np.min(demo_stage_heatmap[:, :, FLAGS.limbs[limb_num][0]]) &gt; -2000 and np.min(</span><br><span class="line">                            demo_stage_heatmap[:, :, FLAGS.limbs[limb_num][1]]) &gt; -2000:</span><br><span class="line">                        x1 = joint_coord_set[FLAGS.limbs[limb_num][0], 0]</span><br><span class="line">                        y1 = joint_coord_set[FLAGS.limbs[limb_num][0], 1]</span><br><span class="line">                        x2 = joint_coord_set[FLAGS.limbs[limb_num][1], 0]</span><br><span class="line">                        y2 = joint_coord_set[FLAGS.limbs[limb_num][1], 1]</span><br><span class="line">                        length = ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5</span><br><span class="line">                        <span class="keyword">if</span> length &lt; 10000 and length &gt; 5:</span><br><span class="line">                            deg = math.degrees(math.atan2(x1 - x2, y1 - y2))</span><br><span class="line">                            polygon = cv2.ellipse2Poly((int((y1 + y2) / 2), int((x1 + x2) / 2)),</span><br><span class="line">                                                       (int(length / 2), 3),</span><br><span class="line">                                                       int(deg),</span><br><span class="line">                                                       0, 360, 1)</span><br><span class="line">                            color_code_num = limb_num // 4</span><br><span class="line">                            limb_color = list(</span><br><span class="line">                                map(lambda x: x + 35 * (limb_num % 4), FLAGS.joint_color_code[color_code_num]))</span><br><span class="line"></span><br><span class="line">                            cv2.fillConvexPoly(test_img, polygon, color=limb_color)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> tmp_img is not None:</span><br><span class="line">                    tmp_img = np.lib.pad(tmp_img, ((0, vertical_imgs[0].shape[0] - tmp_img.shape[0]), (0, 0)),</span><br><span class="line">                                         <span class="string">'constant'</span>, constant_values=(0, 0))</span><br><span class="line">                    vertical_imgs.append(tmp_img)</span><br><span class="line"></span><br><span class="line">                <span class="comment"># Concat horizontally  Concat水平</span></span><br><span class="line">                output_img = None</span><br><span class="line">                <span class="keyword">for</span> col <span class="keyword">in</span> range(len(vertical_imgs)):</span><br><span class="line">                    output_img = np.concatenate((output_img, vertical_imgs[col]), axis=1) <span class="keyword">if</span> output_img is not None <span class="keyword">else</span> \</span><br><span class="line">                        vertical_imgs[col]</span><br><span class="line"></span><br><span class="line">                output_img = output_img.astype(np.uint8)</span><br><span class="line">                output_img = cv2.applyColorMap(output_img, cv2.COLORMAP_JET)</span><br><span class="line">                test_img = cv2.resize(test_img, (300, 300), cv2.INTER_LANCZOS4)</span><br><span class="line">                <span class="comment">#cv2.imshow('hm', output_img)</span></span><br><span class="line">                <span class="comment">#cv2.moveWindow('hm', 2000, 200)</span></span><br><span class="line">                <span class="comment">#cv2.imshow('rgb', test_img)</span></span><br><span class="line">                <span class="comment">#cv2.moveWindow('rgb', 2000, 750)</span></span><br><span class="line">                <span class="keyword">if</span> cv2.waitKey(1) == ord(<span class="string">'q'</span>): <span class="built_in">break</span></span><br></pre></td></tr></table></figure>
+<h3 id="语音部分代码"><a href="#语音部分代码" class="headerlink" title="语音部分代码"></a>语音部分代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line">class Msp:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">    def <span class="built_in">read</span>(self):</span><br><span class="line">        global filename, dll, login_params</span><br><span class="line">        <span class="comment"># 音频文件路径</span></span><br><span class="line">        input_filename = <span class="string">"output.wav"</span></span><br><span class="line">        input_filepath = <span class="string">"D:/大挑项目有语音回复版本/5c5451a0/bin/audio/"</span></span><br><span class="line">        in_path = input_filepath + input_filename</span><br><span class="line">        <span class="comment"># 块大小、每次采集的位数、声道数、采样率：每秒采集数据的次数、录音时间、文件存放位置</span></span><br><span class="line">        CHUNK = 256  <span class="comment"># 1024</span></span><br><span class="line">        FORMAT = pyaudio.paInt16</span><br><span class="line">        CHANNELS = 1  <span class="comment"># 2</span></span><br><span class="line">        RATE = 11025  <span class="comment"># 44100</span></span><br><span class="line">        RECORD_SECONDS = 5</span><br><span class="line">        WAVE_OUTPUT_FILENAME = in_path</span><br><span class="line">        <span class="comment"># 开始录音</span></span><br><span class="line">        p = pyaudio.PyAudio()</span><br><span class="line">        stream = p.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"* recording *"</span>)</span><br><span class="line"></span><br><span class="line">        frames = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(0, int(RATE / CHUNK * RECORD_SECONDS)):</span><br><span class="line">            data = stream.read(CHUNK)</span><br><span class="line">            frames.append(data)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"* done recording *"</span>)</span><br><span class="line">        <span class="comment"># 结束录音</span></span><br><span class="line">        stream.stop_stream()</span><br><span class="line">        stream.close()</span><br><span class="line">        p.terminate()</span><br><span class="line"></span><br><span class="line">        wf = wave.open(WAVE_OUTPUT_FILENAME, <span class="string">'wb'</span>)</span><br><span class="line">        wf.setnchannels(CHANNELS)</span><br><span class="line">        wf.setsampwidth(p.get_sample_size(FORMAT))</span><br><span class="line">        wf.setframerate(RATE)</span><br><span class="line">        wf.writeframes(b<span class="string">''</span>.join(frames))</span><br><span class="line">        wf.close()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 调用动态链接库</span></span><br><span class="line">        dll = cdll.LoadLibrary(<span class="string">"D:/大挑项目有语音回复版本/5c5451a0/bin/msc_x64.dll"</span>)</span><br><span class="line">        <span class="comment"># 登录参数，apppid一定要和你的下载SDK对应，work_dir是SDK文件夹名</span></span><br><span class="line">        filename = in_path</span><br><span class="line">    <span class="comment"># 初始化msc，用户登录</span></span><br><span class="line">    def login(self):</span><br><span class="line">        ret = dll.MSPLogin(None, None, login_params)</span><br><span class="line">        <span class="comment"># print('MSPLogin =&gt;', ret)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 退出登录</span></span><br><span class="line">    def <span class="built_in">logout</span>(self):</span><br><span class="line">        ret = dll.MSPLogout()</span><br><span class="line">        <span class="comment"># print('MSPLogout =&gt;', ret)</span></span><br><span class="line"></span><br><span class="line">    def isr(self, audiofile, session_begin_params):</span><br><span class="line">        ret = c_int()</span><br><span class="line">        sessionID = c_voidp()</span><br><span class="line">        dll.QISRSessionBegin.restype = c_char_p</span><br><span class="line">        <span class="comment"># 开始一次语音识别</span></span><br><span class="line">        sessionID = dll.QISRSessionBegin(None, session_begin_params, byref(ret))</span><br><span class="line">        <span class="comment"># print('QISRSessionBegin =&gt; sessionID:', sessionID, 'ret:', ret.value)</span></span><br><span class="line">        <span class="comment"># 每秒【1000ms】  1600 次 * 16 bit 【2B】 ，每毫秒：1.6 * 16bit 【1.6*2B】 = 32Byte</span></span><br><span class="line">        <span class="comment"># 1帧音频20ms【640B】 每次写入 10帧=200ms 【6400B】</span></span><br><span class="line">        piceLne = FRAME_LEN * 20</span><br><span class="line">        piceLne = 1638 * 2</span><br><span class="line">        epStatus = c_int(0)</span><br><span class="line">        recogStatus = c_int(0)</span><br><span class="line"></span><br><span class="line">        wavFile = open(audiofile, <span class="string">'rb'</span>)</span><br><span class="line">        wavData = wavFile.read(piceLne)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 本接口需不断调用，直到音频全部写入为止。上传音频时，需更新audioStatus的值。具体来说:</span></span><br><span class="line">        <span class="comment"># 当写入首块音频时, 将audioStatus置为MSP_AUDIO_SAMPLE_FIRST</span></span><br><span class="line">        <span class="comment"># 当写入最后一块音频时, 将audioStatus置为MSP_AUDIO_SAMPLE_LAST</span></span><br><span class="line">        <span class="comment"># 其余情况下, 将audioStatus置为MSP_AUDIO_SAMPLE_CONTINUE</span></span><br><span class="line">        <span class="comment"># 同时，需定时检查两个变量：epStatus和rsltStatus。具体来说:</span></span><br><span class="line">        <span class="comment"># 当epStatus显示已检测到后端点时，MSC已不再接收音频，应及时停止音频写入</span></span><br><span class="line">        <span class="comment"># 当rsltStatus显示有识别结果返回时，即可从MSC缓存中获取结果</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 写入本次识别的音频</span></span><br><span class="line">        ret = dll.QISRAudioWrite(sessionID, wavData, len(wavData), MSP_AUDIO_SAMPLE_FIRST, byref(epStatus),</span><br><span class="line">                                 byref(recogStatus))</span><br><span class="line">        <span class="comment"># print('len(wavData):', len(wavData), 'QISRAudioWrite ret:', ret, 'epStatus:', epStatus.value, 'recogStatus:',</span></span><br><span class="line">        <span class="comment">#      recogStatus.value)</span></span><br><span class="line">        time.sleep(0.05)</span><br><span class="line">        <span class="keyword">while</span> wavData:</span><br><span class="line">            wavData = wavFile.read(piceLne)</span><br><span class="line">            <span class="keyword">if</span> len(wavData) == 0:</span><br><span class="line">                <span class="built_in">break</span></span><br><span class="line">            ret = dll.QISRAudioWrite(sessionID, wavData, len(wavData), MSP_AUDIO_SAMPLE_CONTINUE, byref(epStatus),</span><br><span class="line">                                     byref(recogStatus))</span><br><span class="line">            <span class="comment"># print('len(wavData):', len(wavData), 'QISRAudioWrite ret:', ret, 'epStatus:', epStatus.value,</span></span><br><span class="line">            <span class="comment">#      'recogStatus:', recogStatus.value)</span></span><br><span class="line">            time.sleep(0.05)</span><br><span class="line">        wavFile.close()</span><br><span class="line">        ret = dll.QISRAudioWrite(sessionID, None, 0, MSP_AUDIO_SAMPLE_LAST, byref(epStatus), byref(recogStatus))</span><br><span class="line">        <span class="comment"># print('len(wavData):', len(wavData), 'QISRAudioWrite ret:', ret, 'epStatus:', epStatus.value, 'recogStatus:',</span></span><br><span class="line">        <span class="comment">#      recogStatus.value)</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"所有待识别音频已全部发送完毕，等待获取识别结果"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 获取音频</span></span><br><span class="line">        laststr = <span class="string">''</span></span><br><span class="line">        counter = 0</span><br><span class="line">        <span class="keyword">while</span> recogStatus.value != MSP_REC_STATUS_COMPLETE:</span><br><span class="line">            ret = c_int()</span><br><span class="line">            <span class="comment"># 获取识别结果</span></span><br><span class="line">            dll.QISRGetResult.restype = c_char_p</span><br><span class="line">            retstr = dll.QISRGetResult(sessionID, byref(recogStatus), 0, byref(ret))</span><br><span class="line">            <span class="keyword">if</span> retstr is not None:</span><br><span class="line">                laststr += retstr.decode()</span><br><span class="line">                <span class="comment">#print(laststr)</span></span><br><span class="line">            <span class="comment"># print('ret:', ret.value, 'recogStatus:', recogStatus.value)</span></span><br><span class="line">            counter += 1</span><br><span class="line">            <span class="comment">#time.sleep(0.2)</span></span><br><span class="line">            counter += 1</span><br><span class="line">            <span class="keyword">if</span> counter == 500:</span><br><span class="line">                laststr += <span class="string">'讯飞语音识别失败'</span></span><br><span class="line">                <span class="built_in">break</span></span><br><span class="line">        <span class="comment"># print(laststr)</span></span><br><span class="line">        <span class="comment"># 结束本次语音识别</span></span><br><span class="line">        ret = dll.QISRSessionEnd(sessionID, <span class="string">'END'</span>)</span><br><span class="line">        <span class="comment"># print('end ret: ', ret)</span></span><br><span class="line">        <span class="built_in">return</span> laststr</span><br></pre></td></tr></table></figure>
+<h3 id="车载系统界面部分代码"><a href="#车载系统界面部分代码" class="headerlink" title="车载系统界面部分代码"></a>车载系统界面部分代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">class Desktop(QMainWindow):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.init_ui()</span><br><span class="line"></span><br><span class="line">    <span class="string">""</span><span class="string">"对界面进行布局和组件的布置"</span><span class="string">""</span></span><br><span class="line"></span><br><span class="line">    def init_ui(self):</span><br><span class="line">        self.main_widget = QtWidgets.QWidget()  <span class="comment"># 创建窗口主部件</span></span><br><span class="line">        self.main_layout = QtWidgets.QGridLayout()  <span class="comment"># 创建主部件的网格布局</span></span><br><span class="line">        self.main_widget.setLayout(self.main_layout)  <span class="comment"># 设置窗口主部件布局为网格布局</span></span><br><span class="line"></span><br><span class="line">        self.window = QtWidgets.QWidget()  <span class="comment"># 创建显示窗口</span></span><br><span class="line">        self.window.setObjectName(<span class="string">'window'</span>)</span><br><span class="line">        self.browser = QWebEngineView()</span><br><span class="line">        self.browser.load(QUrl(<span class="string">'https://map.baidu.com/'</span>))</span><br><span class="line">        QApplication.processEvents()</span><br><span class="line">        self.setCentralWidget(self.browser)</span><br><span class="line">        self.child0=Msp()</span><br><span class="line">        self.child1 = Example1()</span><br><span class="line">        self.child2 = Example2()</span><br><span class="line">        self.child3 = Example3()</span><br><span class="line">        self.click()</span><br><span class="line"></span><br><span class="line">    def click(self):</span><br><span class="line"></span><br><span class="line">        self.taskbur = QtWidgets.QWidget()  <span class="comment"># 创建任务栏</span></span><br><span class="line">        self.taskbur.setObjectName(<span class="string">'taskbur'</span>)</span><br><span class="line">        self.taskbur_layout = QtWidgets.QHBoxLayout()  <span class="comment"># 创建左侧部件的水平布局层</span></span><br><span class="line">        self.taskbur.setLayout(self.taskbur_layout)  <span class="comment"># 设置左侧部件布局为水平</span></span><br><span class="line">        self.taskbur.setStyleSheet(<span class="string">'QWidget&#123;background-color:rgb(16, 15, 18)&#125;'</span>)  <span class="comment"># 设置背景色</span></span><br><span class="line"></span><br><span class="line">        self.main_layout.addWidget(self.browser, 0, 0, 30, 12)  <span class="comment"># 任务栏部件在第0行第0列，占30行12列</span></span><br><span class="line">        self.main_layout.addWidget(self.taskbur, 31, 0, 2, 12)  <span class="comment"># 显示窗口部件在第31行第0列，占2行12列</span></span><br><span class="line">        self.setCentralWidget(self.main_widget)  <span class="comment"># 设置窗口主部件</span></span><br><span class="line"></span><br><span class="line">        <span class="string">""</span><span class="string">"任务栏布置"</span><span class="string">""</span></span><br><span class="line">        <span class="comment"># 控件QPushButton的定义和设置</span></span><br><span class="line">        self.btn1 = QPushButton(self)</span><br><span class="line">        self.btn1.setMaximumSize(73, 50)  <span class="comment"># 图片分辨率为219x150</span></span><br><span class="line">        self.btn1.setMinimumSize(73, 50)</span><br><span class="line">        self.btn1.setStyleSheet(<span class="string">"QPushButton&#123;border-image: url(D:/大挑项目有语音回复版本/Icon/model.png)&#125;"</span>)  <span class="comment">###</span></span><br><span class="line">        self.taskbur_layout.addWidget(self.btn1)</span><br><span class="line">        self.btn1.clicked.connect(self.Work0)</span><br><span class="line"></span><br><span class="line">        self.btn2 = QPushButton(self)</span><br><span class="line">        self.btn2.setMaximumSize(81, 80)  <span class="comment"># 图片分辨率为126x125</span></span><br><span class="line">        self.btn2.setMinimumSize(81, 80)</span><br><span class="line">        self.btn2.setStyleSheet(<span class="string">"QPushButton&#123;border-image: url(D:/大挑项目有语音回复版本/Icon/音乐.png)&#125;"</span>)</span><br><span class="line">        self.taskbur_layout.addWidget(self.btn2)</span><br><span class="line">        self.btn2.clicked.connect(self.Work1)</span><br><span class="line"></span><br><span class="line">        self.btn3 = QPushButton(self)</span><br><span class="line">        self.btn3.setMaximumSize(70, 70)  <span class="comment"># 图片分辨率为152x152</span></span><br><span class="line">        self.btn3.setMinimumSize(70, 70)</span><br><span class="line">        self.btn3.setStyleSheet(<span class="string">"QPushButton&#123;border-image: url(D:/大挑项目有语音回复版本/Icon/加热.png)&#125;"</span>)</span><br><span class="line">        self.taskbur_layout.addWidget(self.btn3)</span><br><span class="line">        self.btn3.clicked.connect(self.Work8)</span><br><span class="line"></span><br><span class="line">        self.btn4 = QPushButton(self)</span><br><span class="line">        self.btn4.setMaximumSize(70, 70)  <span class="comment"># 图片分辨率为219x150</span></span><br><span class="line">        self.btn4.setMinimumSize(70, 70)</span><br><span class="line">        self.btn4.setStyleSheet(<span class="string">"QPushButton&#123;border-image: url(D:/大挑项目有语音回复版本/Icon/左座椅.png)&#125;"</span>)</span><br><span class="line">        self.taskbur_layout.addWidget(self.btn4)</span><br><span class="line">        self.btn4.clicked.connect(self.Work5)</span><br><span class="line"></span><br><span class="line">        self.btn5 = QPushButton(self)</span><br><span class="line">        self.btn5.setMaximumSize(70, 70)  <span class="comment"># 图片分辨率为200x200</span></span><br><span class="line">        self.btn5.setMinimumSize(70, 70)</span><br><span class="line">        self.btn5.setStyleSheet(<span class="string">"QPushButton&#123;border-image: url(D:/大挑项目有语音回复版本/Icon/空调开放.png)&#125;"</span>)</span><br><span class="line">        self.taskbur_layout.addWidget(self.btn5)</span><br><span class="line">        self.btn5.clicked.connect(self.Work2)</span><br><span class="line"></span><br><span class="line">        self.btn6 = QPushButton(self)</span><br><span class="line">        self.btn6.setMaximumSize(70, 70)  <span class="comment"># 图片分辨率为184x184</span></span><br><span class="line">        self.btn6.setMinimumSize(70, 70)</span><br><span class="line">        self.btn6.setStyleSheet(<span class="string">"QPushButton&#123;border-image: url(D:/大挑项目有语音回复版本/Icon/右座椅.png)&#125;"</span>)</span><br><span class="line">        self.taskbur_layout.addWidget(self.btn6)</span><br><span class="line">        self.btn6.clicked.connect(self.Work7)</span><br><span class="line"></span><br><span class="line">        self.btn7 = QPushButton(self)</span><br><span class="line">        self.btn7.setMaximumSize(70, 70)  <span class="comment"># 图片分辨率为123x123</span></span><br><span class="line">        self.btn7.setMinimumSize(70, 70)</span><br><span class="line">        self.btn7.setStyleSheet(<span class="string">"QPushButton&#123;border-image: url(D:/大挑项目有语音回复版本/Icon/除霜.png)&#125;"</span>)</span><br><span class="line">        self.taskbur_layout.addWidget(self.btn7)</span><br><span class="line">        self.btn7.clicked.connect(self.Work6)</span><br><span class="line"></span><br><span class="line">        self.btn8 = QPushButton(self)</span><br><span class="line">        self.btn8.setMaximumSize(71, 70)  <span class="comment"># 图片分辨率为145x144</span></span><br><span class="line">        self.btn8.setMinimumSize(71, 70)</span><br><span class="line">        self.btn8.setStyleSheet(<span class="string">"QPushButton&#123;border-image: url(D:/大挑项目有语音回复版本/Icon/电话.png)&#125;"</span>)</span><br><span class="line">        self.taskbur_layout.addWidget(self.btn8)</span><br><span class="line">        self.btn8.clicked.connect(self.Work3)</span><br><span class="line"></span><br><span class="line">        self.btn9 = QPushButton(self)</span><br><span class="line">        self.btn9.setMaximumSize(70, 70)  <span class="comment"># 图片分辨率为124x124</span></span><br><span class="line">        self.btn9.setMinimumSize(70, 70)</span><br><span class="line">        self.btn9.setStyleSheet(<span class="string">"QPushButton&#123;border-image: url(D:/大挑项目有语音回复版本/Icon/音量.png)&#125;"</span>)</span><br><span class="line">        self.taskbur_layout.addWidget(self.btn9)</span><br><span class="line">        self.btn9.clicked.connect(self.Work4)</span><br><span class="line"></span><br><span class="line">        <span class="string">""</span><span class="string">"显示窗口布置"</span><span class="string">""</span></span><br><span class="line">        self.btn10 = QPushButton(self)</span><br><span class="line">        self.btn10.setGeometry(480, 10, 60, 60)  <span class="comment"># 图片分辨率为130x130</span></span><br><span class="line">        self.btn10.setStyleSheet(<span class="string">"QPushButton&#123;border-image: url(D:/大挑项目有语音回复版本/Icon/特斯拉logo.png)&#125;"</span>)</span><br><span class="line"></span><br><span class="line">        self.btn11 = QPushButton(self)</span><br><span class="line">        self.btn11.setGeometry(80, 10, 60, 60)  <span class="comment"># 图片分辨率为130x130</span></span><br><span class="line">        self.btn11.setStyleSheet(<span class="string">"QPushButton&#123;border-image: url(D:/大挑项目有语音回复版本/Icon/4G.png)&#125;"</span>)</span><br><span class="line"></span><br><span class="line">        self.btn12 = QPushButton(self)</span><br><span class="line">        self.btn12.setGeometry(40, 10, 60, 60)  <span class="comment"># 图片分辨率为130x130</span></span><br><span class="line">        self.btn12.setStyleSheet(<span class="string">"QPushButton&#123;border-image: url(D:/大挑项目有语音回复版本/Icon/蓝牙.png)&#125;"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="最终实现效果"><a href="#最终实现效果" class="headerlink" title="最终实现效果"></a>最终实现效果</h2><h3 id="打开音乐"><a href="#打开音乐" class="headerlink" title="打开音乐"></a>打开音乐</h3><p><img src="/images/车载手势/音乐.png" alt> </p>
+<h3 id="控制音量"><a href="#控制音量" class="headerlink" title="控制音量"></a>控制音量</h3><p><img src="/images/车载手势/音量.png" alt></p>
+<h3 id="打开通话界面"><a href="#打开通话界面" class="headerlink" title="打开通话界面"></a>打开通话界面</h3><p><img src="/images/车载手势/通话.png" alt></p>
+<h3 id="返回地图"><a href="#返回地图" class="headerlink" title="返回地图"></a>返回地图</h3><p><img src="/images/车载手势/地图.png" alt></p>
+<h3 id="打开语音"><a href="#打开语音" class="headerlink" title="打开语音"></a>打开语音</h3><p><img src="/images/车载手势/语音.png" alt></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>还有打开车灯，空调等手势</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/智能/" rel="tag"><i class="fa fa-google"></i> 智能</a>
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-google"></i> python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/22/基于OpenCV和TensorFlow的手势识别控制的人机交互/" rel="next" title="基于OpenCV和TensorFlow的手势识别控制的人机交互">
+                <i class="fa fa-chevron-left"></i> 基于OpenCV和TensorFlow的手势识别控制的人机交互
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/26/爬取淘宝各品牌手机月销量数据/" rel="prev" title="爬取淘宝各品牌手机月销量数据">
+                爬取淘宝各品牌手机月销量数据 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/toxian.jpg" alt="我曹">
+            
+              <p class="site-author-name" itemprop="name">我曹</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/CQT08076111" title="GitHub &rarr; https://github.com/CQT08076111" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:yourname@gmail.com" title="E-Mail &rarr; mailto:yourname@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/yourname" title="Weibo &rarr; https://weibo.com/yourname" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://plus.google.com/yourname" title="Google &rarr; https://plus.google.com/yourname" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计思路："><span class="nav-number">1.</span> <span class="nav-text">设计思路：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创新点："><span class="nav-number">2.</span> <span class="nav-text">创新点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术关键："><span class="nav-number">3.</span> <span class="nav-text">技术关键：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目设计方案："><span class="nav-number">4.</span> <span class="nav-text">项目设计方案：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心代码实现"><span class="nav-number">5.</span> <span class="nav-text">核心代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#手势识别部分代码"><span class="nav-number">5.1.</span> <span class="nav-text">手势识别部分代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语音部分代码"><span class="nav-number">5.2.</span> <span class="nav-text">语音部分代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#车载系统界面部分代码"><span class="nav-number">5.3.</span> <span class="nav-text">车载系统界面部分代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最终实现效果"><span class="nav-number">6.</span> <span class="nav-text">最终实现效果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#打开音乐"><span class="nav-number">6.1.</span> <span class="nav-text">打开音乐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制音量"><span class="nav-number">6.2.</span> <span class="nav-text">控制音量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开通话界面"><span class="nav-number">6.3.</span> <span class="nav-text">打开通话界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回地图"><span class="nav-number">6.4.</span> <span class="nav-text">返回地图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开语音"><span class="nav-number">6.5.</span> <span class="nav-text">打开语音</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">6.6.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">我曹</span>
+
+  
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.0</div>
+-->
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
