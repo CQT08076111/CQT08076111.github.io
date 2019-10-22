@@ -103,27 +103,23 @@
 
 
 
-  <meta name="description" content="第一步准备好正负样本图片，正样本就是含有目标的图片，负样本就是不还有目标的图片，这里本人准备了3005张正样本5500张负样本（注意第四步只用来3000张正样本，第五步只用来2500张正样本，而负样本只用来2800张，样本的数量要比样本的使用量大比如会出错或训练中会停在一个地方），建好文件夹，如图所示，data用来保存第四步生成的文件，data1用来保存第五步生成的模型文件，pos和neg用来保存">
-<meta name="keywords" content="智能,python">
+  <meta name="description" content="使用halcon，用拟合，频域处理等方法对饼干的形状及表面裂痕等缺陷进行检测饼干 检测结果 代码实现123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798">
+<meta name="keywords" content="智能,halcon">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何用Opencv训练手势识别模型">
-<meta property="og:url" content="http://yoursite.com/2019/04/21/如何用Opencv训练手势识别模型/index.html">
+<meta property="og:title" content="用halcon实现对饼干的缺陷检测">
+<meta property="og:url" content="http://yoursite.com/2019/10/22/用halcon实现饼干的缺陷检测/index.html">
 <meta property="og:site_name" content="CQT">
-<meta property="og:description" content="第一步准备好正负样本图片，正样本就是含有目标的图片，负样本就是不还有目标的图片，这里本人准备了3005张正样本5500张负样本（注意第四步只用来3000张正样本，第五步只用来2500张正样本，而负样本只用来2800张，样本的数量要比样本的使用量大比如会出错或训练中会停在一个地方），建好文件夹，如图所示，data用来保存第四步生成的文件，data1用来保存第五步生成的模型文件，pos和neg用来保存">
+<meta property="og:description" content="使用halcon，用拟合，频域处理等方法对饼干的形状及表面裂痕等缺陷进行检测饼干 检测结果 代码实现123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/级联分类器/10.png">
-<meta property="og:image" content="http://yoursite.com/images/级联分类器/11.png">
-<meta property="og:image" content="http://yoursite.com/images/级联分类器/12.png">
-<meta property="og:image" content="http://yoursite.com/images/级联分类器/13.png">
-<meta property="og:image" content="http://yoursite.com/images/级联分类器/14.png">
-<meta property="og:image" content="http://yoursite.com/images/级联分类器/演示1.png">
-<meta property="og:image" content="http://yoursite.com/images/级联分类器/演示2.png">
-<meta property="og:image" content="http://yoursite.com/images/级联分类器/演示3.png">
-<meta property="og:updated_time" content="2019-04-24T09:23:54.630Z">
+<meta property="og:image" content="http://yoursite.com/images/halcon饼干缺陷检测/饼干11.png">
+<meta property="og:image" content="http://yoursite.com/images/halcon饼干缺陷检测/饼干21.png">
+<meta property="og:image" content="http://yoursite.com/images/halcon饼干缺陷检测/饼干12.png">
+<meta property="og:image" content="http://yoursite.com/images/halcon饼干缺陷检测/饼干22.png">
+<meta property="og:updated_time" content="2019-10-22T13:17:18.698Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何用Opencv训练手势识别模型">
-<meta name="twitter:description" content="第一步准备好正负样本图片，正样本就是含有目标的图片，负样本就是不还有目标的图片，这里本人准备了3005张正样本5500张负样本（注意第四步只用来3000张正样本，第五步只用来2500张正样本，而负样本只用来2800张，样本的数量要比样本的使用量大比如会出错或训练中会停在一个地方），建好文件夹，如图所示，data用来保存第四步生成的文件，data1用来保存第五步生成的模型文件，pos和neg用来保存">
-<meta name="twitter:image" content="http://yoursite.com/images/级联分类器/10.png">
+<meta name="twitter:title" content="用halcon实现对饼干的缺陷检测">
+<meta name="twitter:description" content="使用halcon，用拟合，频域处理等方法对饼干的形状及表面裂痕等缺陷进行检测饼干 检测结果 代码实现123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798">
+<meta name="twitter:image" content="http://yoursite.com/images/halcon饼干缺陷检测/饼干11.png">
 
 
 
@@ -131,7 +127,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/04/21/如何用Opencv训练手势识别模型/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/22/用halcon实现饼干的缺陷检测/">
 
 
 
@@ -141,7 +137,7 @@
   };
 </script>
 
-  <title>如何用Opencv训练手势识别模型 | CQT</title>
+  <title>用halcon实现对饼干的缺陷检测 | CQT</title>
   
 
 
@@ -370,7 +366,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/21/如何用Opencv训练手势识别模型/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/22/用halcon实现饼干的缺陷检测/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="我曹">
@@ -387,7 +383,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">如何用Opencv训练手势识别模型
+          <h1 class="post-title" itemprop="name headline">用halcon实现对饼干的缺陷检测
 
               
             
@@ -413,24 +409,12 @@
                 
               
 
-              <time title="创建时间：2019-04-21 17:08:00" itemprop="dateCreated datePublished" datetime="2019-04-21T17:08:00+08:00">2019-04-21</time>
+              <time title="创建时间：2019-10-22 00:00:00 / 修改时间：21:17:18" itemprop="dateCreated datePublished" datetime="2019-10-22T00:00:00+08:00">2019-10-22</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-04-24 17:23:54" itemprop="dateModified" datetime="2019-04-24T17:23:54+08:00">2019-04-24</time>
               
             
           </span>
@@ -489,20 +473,9 @@
       
 
       
-        <h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>准备好正负样本图片，正样本就是含有目标的图片，负样本就是不还有目标的图片，这里本人准备了3005张正样本5500张负样本（注意第四步只用来3000张正样本，第五步只用来2500张正样本，而负样本只用来2800张，样本的数量要比样本的使用量大比如会出错或训练中会停在一个地方），建好文件夹，如图所示，data用来保存第四步生成的文件，data1用来保存第五步生成的模型文件，pos和neg用来保存正负样本。其中正样本图片最好是裁剪成同一尺寸，我这里是建成24x24（建议图片大小在20x20到30x30之间）负样本分辨率不作要求大小可以不一，便于后期的说明文件的建立。图片的编辑我使用的是美图看看，批量编辑工具，可以批量将图片改成同一尺寸。<br><img src="/images/级联分类器/10.png" alt></p>
-<h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p>建立正负样本说明文件，在cmd下进入pos文件夹目录里，输入  dir /b &gt; pos.txt,用记事本打开该文件，删除最后一行，最后将名字归一化如下所示：同样的方法进入neg文件夹内，用同样的方法建立描述文件neg.txt，用记事本打开该文件，只需删掉最后一行<br><img src="/images/级联分类器/11.png" alt></p>
-<h2 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h2><p>打开记事本，去除pos.txt最后一行的pos文件夹；<br>将所有jpg替换成 jpg 1 0 0 24 24。这里1表示当前图片重复出现的次数是1， 0 0 24 24表示目标图片大小是矩形框从（0，0）到（24，24）。注：按自己图片分辨率大小<br><img src="/images/级联分类器/12.png" alt></p>
-<h2 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opencv_createsamples.exe -vec data/pos.vec -info pos/pos.txt -<span class="built_in">bg</span> neg/neg.txt -w 24 -h 24 -num 3000</span><br></pre></td></tr></table></figure>
-<p>创建vec文件：将opencv自带的opencv_createsamples.exe和 opencv_traincascade.exe放到图片文件夹的上层目录，利用opencv_createsamples.exe应用程序在该目录下使用如图cmd命令：<br>其中的-vec是指定后面输出vec文件的文件名，-info指定正样本描述文件，-bg指定负样本描述文件，-w和-h分别指正样本的宽和高，-num表示正样本的个数。执行完该命令后就会在当前目录下生产一个pos.vec文件了。</p>
-<h2 id="第五步"><a href="#第五步" class="headerlink" title="第五步"></a>第五步</h2><p>使用opencv_traincascade.exe文件进行训练LBP特征<br>首先在当前目录下新建一个data1文件夹用于存放生成的.xml文件。<br>在当前目录使用cmd命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opencv_traincascade.exe -data data1 -vec data/pos.vec -<span class="built_in">bg</span> neg/neg.txt -numPos 2500 -numNeg 2800 -numStages 16 -precalcValbufSize 200 -precalcdxBufSize 1000 -featureType LBP -w 24 -h 24</span><br></pre></td></tr></table></figure></p>
-<p>截图如下：其中-data 输出目录，-numPos正样本数目-numNeg负样本数目-numStages训练级数</p>
-<h2 id="在命令行上的操作"><a href="#在命令行上的操作" class="headerlink" title="在命令行上的操作"></a>在命令行上的操作</h2><p><img src="/images/级联分类器/13.png" alt></p>
-<h3 id="训练开始和结束图片"><a href="#训练开始和结束图片" class="headerlink" title="训练开始和结束图片"></a>训练开始和结束图片</h3><p><img src="/images/级联分类器/14.png" alt></p>
-<h2 id="使用opencv-haartraining-exe训练haar特征"><a href="#使用opencv-haartraining-exe训练haar特征" class="headerlink" title="使用opencv_haartraining.exe训练haar特征"></a>使用opencv_haartraining.exe训练haar特征</h2><p>其他操作一样，以上训练LBP特征的第五步的命令改成如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opencv_haartraining.exe -vec data/pos.vec -<span class="built_in">bg</span> neg/neg.txt -data data1 -w 24 -h 24 -mem 1024 -npos 2500 -neg 2800 -nstages 16 -nsplits 5</span><br></pre></td></tr></table></figure></p>
-<p>-data 指定生成的文件目录，<br>-vec vec文件名，<br>-bg 负样本描述文件名称，也就是负样本的说明文件(.dat)<br>-nstage 20 指定训练层数，推荐15~20，层数越高，耗时越长。<br>-nsplits 分裂子节点数目,选取默认值 2<br>-minhitrate 最小命中率，即训练目标准确度。<br>-maxfalsealarm最大虚警(误检率)，每一层训练到这个值小于0.5时训练结束，进入下一层训练，<br>-npos 在每个阶段用来训练的正样本数目，<br>-nneg在每个阶段用来训练的负样本数目 这个值可以设置大于真正的负样本图像数目，程序可以自动从负样本图像中切割出和正样本大小一致的,这个参数一半设置为正样本数目的1~3倍 -w -h样本尺寸，与前面对应 -mem 程序可使用的内存，这个设置为256即可，实际运行时根本就不怎么耗内存，以MB为单位 -mode ALL指定haar特征的种类，BASIC仅仅使用垂直特征，ALL表示使用垂直以及45度旋转特征<br>-sym或者-nonsym，后面不用跟其他参数，用于指定目标对象是否垂直对称，若你的对象是垂直对称的，比如脸，则垂直对称有利于提高训练速度</p>
-<h2 id="中间可能遇到的问题与解决"><a href="#中间可能遇到的问题与解决" class="headerlink" title="中间可能遇到的问题与解决"></a>中间可能遇到的问题与解决</h2><h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><p>问题1：对于正负样本的比率网上有很多种说法，有1：2的有1：3等等，样本的数量说法也不一有的只有几百有的要几千，但我都试过了都会产生下面的问题2，3<br>问题2：可能在训练的过程中，过了很长时间但是却一直停留在某一层不动，上网查找解决办法有的说是样本数量不够有的说要增大负样本数目，增大负样本之间的变化! 增加负样本，然后重新接着训练，注意更改负样本的数目，但我修改了很多次无论是增加还是减小正负样本的数量都不行<br>问题3：由于产生问题2，所以我尝试过减小训练的层数（正常是15到20层之间）但是训练出来的模型完全不能用<br>问题4：负样本不要作处理，只要灰度化就行了大小可以不一</p>
-<h3 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h3><p>一开始受到以上问题的困扰，网上的解决方法都没用，所以训练了一个星期都没有训练出可以用的模型出来，在一次偶然中我不小心把500张（分辨率为544x960）没有缩小为24x24的正样本图片掺杂在2505张正常的24x24的正样本中居然就训练出来了（这里联系第一步的解说），训练出模型的识别效果还是会受样本数量和正负样本的比率的影响。其实训练一开始就可以判断你这次训练能否成功了，没必要等到最后或中间停止，一般能成功的都是：训练一开始第一层就会有超过8个迭代层（我有一次超过25层）低于5层你就不用等了，而且随着层数的增加迭代层也会增加（会超过30多层或只增加几层），然后再减少到最后一层时一般也能有超过8层。训练过程每一层的训练时间是差不多的，如果随着训练层次的增加训练时间也会增加很多的话有可能也会训练不出来，训练LBP特征会很快一般只要不到10分钟，而训练haar特征时间很长一般要7到8小时，训练出来的xml文件也比LBP（不到100k）大很多，一般几百k。</p>
-<h2 id="模型效果"><a href="#模型效果" class="headerlink" title="模型效果"></a>模型效果</h2><p><img src="/images/级联分类器/演示1.png" alt><br><img src="/images/级联分类器/演示2.png" alt><br><img src="/images/级联分类器/演示3.png" alt></p>
+        <h2 id="使用halcon，用拟合，频域处理等方法对饼干的形状及表面裂痕等缺陷进行检测"><a href="#使用halcon，用拟合，频域处理等方法对饼干的形状及表面裂痕等缺陷进行检测" class="headerlink" title="使用halcon，用拟合，频域处理等方法对饼干的形状及表面裂痕等缺陷进行检测"></a>使用halcon，用拟合，频域处理等方法对饼干的形状及表面裂痕等缺陷进行检测</h2><h3 id="饼干"><a href="#饼干" class="headerlink" title="饼干"></a>饼干</h3><p><img src="/images/halcon饼干缺陷检测/饼干11.png" alt><br><img src="/images/halcon饼干缺陷检测/饼干21.png" alt></p>
+<h3 id="检测结果"><a href="#检测结果" class="headerlink" title="检测结果"></a>检测结果</h3><p><img src="/images/halcon饼干缺陷检测/饼干12.png" alt><br><img src="/images/halcon饼干缺陷检测/饼干22.png" alt></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line">* Image Acquisition 01: Code generated by Image Acquisition 01</span><br><span class="line">read_image (Image, <span class="string">'E:/超人视觉halcon学习/第一套-超人视觉7000元初级和强化班/2 超人Halcon 强化班 理论+实战教程/个人项目/饼干.jpg'</span>)</span><br><span class="line">dev_close_window()</span><br><span class="line">dev_open_window_fit_image (Image, 0, 0, -1, -1, WindowHandle)</span><br><span class="line">set_display_font (WindowHandle, 14, <span class="string">'mono'</span>, <span class="string">'true'</span>, <span class="string">'false'</span>)</span><br><span class="line">dev_set_line_width (3)</span><br><span class="line">dev_display(Image)</span><br><span class="line">dev_open_window_fit_image (Image, 0, 0, -1, -1, WindowHandle1)</span><br><span class="line">*通道分离</span><br><span class="line">decompose3(Image, ImageRed, ImageGreen, ImageBlue)</span><br><span class="line">threshold (ImageBlue, Regions, 0, 74)</span><br><span class="line">connection(Regions, ConnectedRegions)</span><br><span class="line">closing_circle(ConnectedRegions, RegionClosing,20)</span><br><span class="line">select_shape (RegionClosing, SelectedRegions, <span class="string">'area'</span>, <span class="string">'and'</span>, 85127.2, 2e+006)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*计算区域的空穴面积。</span><br><span class="line">area_holes(SelectedRegions, Area)</span><br><span class="line">*如果area不为0，有空洞缺陷</span><br><span class="line"><span class="keyword">if</span>(Area &gt; 0)    </span><br><span class="line">endif</span><br><span class="line">count_obj (SelectedRegions, Number)</span><br><span class="line">dev_display (Image)</span><br><span class="line">j := 0</span><br><span class="line"></span><br><span class="line">*根据要提取的线的最大宽度18和对比度19是对比度即最暗的点与最亮的点的像素差计算lines_gauss的参数Sigma、Low和High。</span><br><span class="line">calculate_lines_gauss_parameters (18, 20, Sigma, Low, High)</span><br><span class="line"><span class="keyword">for</span> i := 1 to Number by 1</span><br><span class="line">    *注意这里是设置显示的窗口，如果不设置之前的显示可能会被清除</span><br><span class="line">    dev_set_window (WindowHandle1)</span><br><span class="line">    dev_set_line_width (1)</span><br><span class="line">    dev_set_color (<span class="string">'blue'</span>)</span><br><span class="line">    dev_set_draw (<span class="string">'margin'</span>)</span><br><span class="line">    *从对象元组中选择对象。</span><br><span class="line">    select_obj (SelectedRegions, ObjectSelected, i)</span><br><span class="line">    *从区域生成XLD轮廓。</span><br><span class="line">    gen_contour_region_xld(ObjectSelected, Contours, <span class="string">'border'</span>)</span><br><span class="line">    *返回XLD轮廓的坐标。</span><br><span class="line">    get_contour_xld (Contours, Row_R, Col_R)</span><br><span class="line">    *3拟合</span><br><span class="line">    fit_circle_contour_xld(Contours, <span class="string">'algebraic'</span>, -1, 0, 0, 3, 2, Row, Column, Radius, StartPhi, EndPhi, PointOrder)</span><br><span class="line">    *创建一个矩形的XLD轮廓</span><br><span class="line">    gen_circle_contour_xld(ContCircle, Row, Column, Radius, 0, EndPhi, <span class="string">'positive'</span>, 1)</span><br><span class="line">    *返回XLD轮廓的坐标。</span><br><span class="line">    get_contour_xld(ContCircle, Row1, Col)</span><br><span class="line">     *计算所有等高线点到一个椭圆的距离。（计算轮廓上的每一个点到最小外接圆形的最小距离）</span><br><span class="line">    dist_ellipse_contour_points_xld(Contours, <span class="string">'unsigned'</span>, 0,Row, Column, EndPhi, Radius, Radius, Distances)</span><br><span class="line">    *判断饼干轮廓上所有点到最小外接矩形的最小距离是否小于30，小于则正常大于则说明该处存在凹陷</span><br><span class="line">    RectangleOK := max(Distances) &lt;= 30</span><br><span class="line">    </span><br><span class="line">    *做判断，排除有缺陷的饼干</span><br><span class="line">    <span class="keyword">if</span> (RectangleOK)</span><br><span class="line">       </span><br><span class="line">       reduce_domain(ImageRed, ObjectSelected, ImageReduced)</span><br><span class="line">       area_center(ObjectSelected, Area2, Row3, Column3)</span><br><span class="line">       *将区域截取出来，这里注意reduce_domain函数生成的ImageReduced只是显示选中的区域其他部分显示为0，但图片面积还是整张图片面积</span><br><span class="line">       *这种情况下进行傅里叶变换是将整张图片的像素也进行傅里叶变换，而crop_domain函数是直接将选中的区域截取出来，这样可以只对感兴趣的区域进行傅里叶变换</span><br><span class="line">       crop_domain(ImageReduced, ImagePart)</span><br><span class="line">       area_center(ImagePart, Area3, Row4, Column4)</span><br><span class="line">       *用频域处理和线段检测，检测饼干上面的裂缝</span><br><span class="line">       fft_generic (ImagePart, ImageFFT, <span class="string">'to_freq'</span>, -1,<span class="string">'none'</span>, <span class="string">'dc_center'</span>,<span class="string">'complex'</span>)</span><br><span class="line">       get_image_size(ImageFFT, Width1, Height1)</span><br><span class="line">       gen_gauss_filter (ImageGauss,5,5, 0, <span class="string">'n'</span>, <span class="string">'dc_center'</span>, Width1, Height1)</span><br><span class="line">       convol_fft (ImageFFT, ImageGauss, ImageConvol)</span><br><span class="line">       * 注意这里的第四个值要为1，如果为-1，则生成的空域跟原图y轴相反      </span><br><span class="line">       fft_generic (ImageConvol, ImageFFT1, <span class="string">'from_freq'</span>, 1,<span class="string">'none'</span>, <span class="string">'dc_center'</span>,<span class="string">'byte'</span>)</span><br><span class="line">       sub_image (ImagePart, ImageFFT1, ImageSub, 2, 100)</span><br><span class="line">        *前面的操作是为了让缺陷更明显</span><br><span class="line">       * 将图像放大一个给定的倍数。</span><br><span class="line">       ScaleFactor := 0.4</span><br><span class="line">       zoom_image_factor (ImageSub, ImageZoomed, ScaleFactor, ScaleFactor, <span class="string">'constant'</span>)</span><br><span class="line">       *得到图像的域。下面三个函数的作用是使用高斯时避免边界效果</span><br><span class="line">       get_domain (ImageZoomed, Domain)</span><br><span class="line">       erosion_circle(Domain, RegionErosion, 5)</span><br><span class="line">       reduce_domain (ImageZoomed, RegionErosion, ImageReduced1)</span><br><span class="line">       *检测线条及其宽度</span><br><span class="line">       lines_gauss (ImageReduced1, Lines, Sigma, Low, High, <span class="string">'dark'</span>, <span class="string">'false'</span>, <span class="string">'bar-shaped'</span>, <span class="string">'false'</span>)</span><br><span class="line">       </span><br><span class="line">       select_shape_xld (Lines, SelectedXLD, <span class="string">'contlength'</span>, <span class="string">'and'</span>, 34.111, 196.599)</span><br><span class="line">       *这里要经过仿射变换才能在图中裂缝的位置显示裂缝</span><br><span class="line">       hom_mat2d_identity (HomMat2DIdentity)</span><br><span class="line">       *向齐次2D变换矩阵添加平移</span><br><span class="line">       hom_mat2d_translate(HomMat2DIdentity, Row3-Row4,Column3-Column4,  HomMat2DTranslate)</span><br><span class="line">       hom_mat2d_scale_local (HomMat2DTranslate, 1 / ScaleFactor, 1 / ScaleFactor, HomMat2DScale)</span><br><span class="line">       *对XLD轮廓应用任意仿射2D变换。</span><br><span class="line">       affine_trans_contour_xld (SelectedXLD, Defects, HomMat2DScale)</span><br><span class="line">       *注意这里是设置显示的窗口，如果不设置之前的显示可能会被清除</span><br><span class="line">       dev_set_window (WindowHandle)</span><br><span class="line">       dev_set_line_width (3) </span><br><span class="line">       dev_set_color (<span class="string">'red'</span>)</span><br><span class="line">       dev_display (Defects)</span><br><span class="line">       dev_display(Contours)</span><br><span class="line">      *提取的线有些断开所以要做共线联合</span><br><span class="line">       count_obj (Defects, Number)</span><br><span class="line">       <span class="keyword">if</span> (Number&gt;0)</span><br><span class="line">           dev_set_color (<span class="string">'red'</span>)</span><br><span class="line">           set_tposition (WindowHandle, Row, Column)</span><br><span class="line">           write_string (WindowHandle, <span class="string">'NOT OK'</span>)</span><br><span class="line">           area_center(ObjectSelected, Area1, Row2, Column2)</span><br><span class="line">           set_tposition (WindowHandle, Row2-100, Column2-50)</span><br><span class="line">           write_string (WindowHandle, max(Distances))</span><br><span class="line">           set_tposition (WindowHandle, Row2+100, Column2)</span><br><span class="line">           write_string (WindowHandle, <span class="string">'have cracks'</span>)</span><br><span class="line">           *disp_message (WindowHandle, max(Distances), <span class="string">'window'</span>, 20+40*i, 20, <span class="string">'black'</span>, <span class="string">'true'</span>)</span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">           dev_set_color (<span class="string">'green'</span>)</span><br><span class="line">           set_tposition (WindowHandle, Row, Column)</span><br><span class="line">           write_string (WindowHandle, <span class="string">'OK'</span>)</span><br><span class="line">           area_center(ObjectSelected, Area1, Row2, Column2)</span><br><span class="line">           set_tposition (WindowHandle, Row2-100, Column2-50)</span><br><span class="line">           write_string (WindowHandle, max(Distances))</span><br><span class="line">           *disp_message (WindowHandle, max(Distances), <span class="string">'window'</span>, 20+40*i, 20, <span class="string">'black'</span>, <span class="string">'true'</span>)</span><br><span class="line">       endif</span><br><span class="line">      </span><br><span class="line">            </span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">       *注意这里是设置显示的窗口，如果不设置之前的显示可能会被清除</span><br><span class="line">       dev_set_window (WindowHandle)    </span><br><span class="line">       dev_set_line_width (3)        </span><br><span class="line">       dev_set_color (<span class="string">'red'</span>)</span><br><span class="line">       dev_display(Contours)</span><br><span class="line">       set_tposition (WindowHandle, Row, Column)</span><br><span class="line">       write_string (WindowHandle, <span class="string">'NOT OK'</span>)</span><br><span class="line">       area_center(ObjectSelected, Area1, Row2, Column2)</span><br><span class="line">       set_tposition (WindowHandle, Row2-100, Column2-50)</span><br><span class="line">       write_string (WindowHandle, max(Distances))</span><br><span class="line">       *disp_message (WindowHandle, max(Distances), <span class="string">'window'</span>, 20+40*i, 20, <span class="string">'red'</span>, <span class="string">'true'</span>)</span><br><span class="line">       j := j + 1</span><br><span class="line">            </span><br><span class="line">    endif</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">endfor</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -528,7 +501,7 @@
           
             <a href="/tags/智能/" rel="tag"><i class="fa fa-google"></i> 智能</a>
           
-            <a href="/tags/python/" rel="tag"><i class="fa fa-google"></i> python</a>
+            <a href="/tags/halcon/" rel="tag"><i class="fa fa-google"></i> halcon</a>
           
         </div>
       
@@ -541,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/20/基于物联网ONENET平台的温湿度报警器/" rel="next" title="基于物联网ONENET平台的温湿度报警器">
-                <i class="fa fa-chevron-left"></i> 基于物联网ONENET平台的温湿度报警器
+              <a href="/2019/10/09/用halcon实现手机主板的定位测量及字符识别/" rel="next" title="用halcon实现手机主板的定位测量及字符识别">
+                <i class="fa fa-chevron-left"></i> 用halcon实现手机主板的定位测量及字符识别
               </a>
             
           </div>
@@ -550,10 +523,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/22/基于OpenCV和TensorFlow的手势识别控制的人机交互/" rel="prev" title="基于OpenCV和TensorFlow的手势识别控制的人机交互">
-                基于OpenCV和TensorFlow的手势识别控制的人机交互 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -762,7 +731,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步"><span class="nav-number">1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二步"><span class="nav-number">2.</span> <span class="nav-text">第二步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三步"><span class="nav-number">3.</span> <span class="nav-text">第三步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四步"><span class="nav-number">4.</span> <span class="nav-text">第四步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五步"><span class="nav-number">5.</span> <span class="nav-text">第五步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在命令行上的操作"><span class="nav-number">6.</span> <span class="nav-text">在命令行上的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#训练开始和结束图片"><span class="nav-number">6.1.</span> <span class="nav-text">训练开始和结束图片</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用opencv-haartraining-exe训练haar特征"><span class="nav-number">7.</span> <span class="nav-text">使用opencv_haartraining.exe训练haar特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中间可能遇到的问题与解决"><span class="nav-number">8.</span> <span class="nav-text">中间可能遇到的问题与解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题："><span class="nav-number">8.1.</span> <span class="nav-text">问题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决："><span class="nav-number">8.2.</span> <span class="nav-text">解决：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型效果"><span class="nav-number">9.</span> <span class="nav-text">模型效果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用halcon，用拟合，频域处理等方法对饼干的形状及表面裂痕等缺陷进行检测"><span class="nav-number">1.</span> <span class="nav-text">使用halcon，用拟合，频域处理等方法对饼干的形状及表面裂痕等缺陷进行检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#饼干"><span class="nav-number">1.1.</span> <span class="nav-text">饼干</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测结果"><span class="nav-number">1.2.</span> <span class="nav-text">检测结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
             
 
           </div>
